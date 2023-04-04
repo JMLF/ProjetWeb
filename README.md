@@ -2,10 +2,10 @@
 
 ## Backend 
 ### Installation : 
-	```npm init
-npm install express
-npm install prisma
-npx prisma init	```
+```npm init```
+```npm install express```
+```npm install prisma```
+```npx prisma init	```
 
 ### Reference : 
 * https://www.dawsoncodes.com/posts/5/building-a-rest-api-with-prisma-and-expressjs
@@ -17,3 +17,7 @@ npx prisma init	```
 ## BDD 
 Using postgressql on local host.
 When schema.prisma update : 	```npx prisma migrate dev 	```
+
+## ToDo 
+* https://openclassrooms.com/fr/courses/6390246-passez-au-full-stack-avec-node-js-express-et-mongodb/6466459-optimisez-la-structure-du-back-end
+
