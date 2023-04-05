@@ -1,5 +1,5 @@
 # ProjetWeb
-
+Stack : Node.js - express.js - prisma - jest
 ## Backend 
 ### Installation : 
 ```npm init```
@@ -9,7 +9,7 @@
 
 When schema.prisma update :	```npx prisma migrate dev```
 
-## Architecture 
+### Architecture 
 route handler <=> controller <=> service <=> database access object (DAO)
 
 ### Reference : 
@@ -19,6 +19,7 @@ route handler <=> controller <=> service <=> database access object (DAO)
 * https://openclassrooms.com/fr/courses/6390246-passez-au-full-stack-avec-node-js-express-et-mongodb/6466459-optimisez-la-structure-du-back-end
 * https://thekenyandev.com/blog/routes-controllers-services-and-models-daos-in-a-nodejs-api-layered-architecture-in-depth/
 * https://medium.com/@welcomebachar/prisma-node-typescript-jest-mongodb-tdd-ooomg-%EF%B8%8F-4c9be0b0ff2e
+
 
 ## Frontend
 

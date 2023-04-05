@@ -1,44 +1,28 @@
-const { PrismaClient } = require('@prisma/client');
-const prisma = new PrismaClient()
-
+const data = require ('../data/civilityDAO')
+const Civilitybdd = new data.civilityDAO();
 
 exports.CivilityService = class CivilityService {
 
     async getCivilities() {
-        const users = await prisma.Civility.findMany({
-          include: {
-            user: true,
-          },
-        }
-        )
-        return users;
+      try {
+         return await Civilitybdd.read();
+      } catch (e) {
+        return e;
+      }
       };
         
-      async deleteCivilityById(req) {
-        const { id } = req.params;
-
+      async deleteCivilityById(id) {
+        if (id == null || id == "" ) {throw "Merci de préciser l'id";}
         try {
-         const result = await prisma.Civility.delete({
-            where: {
-              id: Number(id),
-            },
-          })
-          return result;
+          return await Civilitybdd.delete(id);
         } catch (e) {
           return e;
         }
       }
 
-      async addCivility(req) {
-        const { status} = req.body;
-
+      async addCivility(status) {
         try {
-        const result = await prisma.Civility.create({
-            data: {
-              status,
-            },
-          })
-          return result;
+          return await Civilitybdd.create(status);
         } catch (e) {
           return e;
         }

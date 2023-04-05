@@ -38,12 +38,21 @@ exports.UserController = class UserController {
     };
 
   async deleteCivilityById (req, res) {
-      const result = await Civility.deleteCivilityById(req);
-      res.json(result);
+      const { id } = req.params;
+
+      try {
+        const result = await Civility.deleteCivilityById(id);
+        res.json(result);
+      } catch (e) {
+        res.status(500).json(e);
+        return;
+      }
     };
 
   async addCivility (req, res) {
-      const result = await Civility.addCivility(req);
+      const {status} = req.body;
+
+      const result = await Civility.addCivility(status);
       res.json(result);
     };
 
