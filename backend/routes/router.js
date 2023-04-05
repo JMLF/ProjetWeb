@@ -1,9 +1,6 @@
 //https://openclassrooms.com/fr/courses/6390246-passez-au-full-stack-avec-node-js-express-et-mongodb/6466459-optimisez-la-structure-du-back-end
 const express = require('express')
 const Controller = require('../controllers/controller');
-const { PrismaClient } = require('@prisma/client');
-const prisma = new PrismaClient()
-
 const User = new Controller.UserController(); //
 
 const router = express.Router();

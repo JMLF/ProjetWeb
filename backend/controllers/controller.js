@@ -1,12 +1,13 @@
-const { PrismaClient } = require('@prisma/client');
-const { json } = require('express');
-const prisma = new PrismaClient()
-
 const userService = require('../service/userService');
 const civilityService = require('../service/civilityService');
-//ne laisser ici qu'un peu de logique, l'appel du service et un switch avec la reponse 
 const User = new userService.UserService(); //
 const Civility = new civilityService.CivilityService(); //
+
+const userm = require('../models/userModel');
+
+//Verifier qu'on a bien le nombre de param attendu mais pas plus 
+// Faire un model lorsque c'est possible
+//Attention à la typo classe vs var 
 
 exports.UserController = class UserController {
   
@@ -16,7 +17,11 @@ exports.UserController = class UserController {
     };
 
   async signupUser (req, res) {
-      const result = await User.signup(req);
+      const {name, surname} = req.body;
+      const ModelUser = new userm.userModel(name,surname); 
+
+      //verifier que les deux champs sont présents
+      const result = await User.signup(ModelUser);
       res.json(result);
     };
 
@@ -26,7 +31,9 @@ exports.UserController = class UserController {
     };
 
   async deleteUserById (req, res) {
-      const result = await User.deleteUserById(req); 
+      const { id } = req.params;
+
+      const result = await User.deleteUserById(id); 
       res.json(result);    
     };
 
@@ -41,7 +48,10 @@ exports.UserController = class UserController {
     };
 
   async linkUserAndCivility (req, res) {
-      const result = await User.linkUserAndCivility(req);
+      const { civilityId } = req.body;
+      const { id } = req.params;
+
+      const result = await User.linkUserAndCivility(id, civilityId);
       res.json(result);
     };
 

@@ -2,67 +2,48 @@
 // deplacer tout les appel bdd vers le DAO
 
 const { PrismaClient } = require('@prisma/client');
+const { empty } = require('@prisma/client/runtime');
 const { json } = require('express');
 const prisma = new PrismaClient()
 
+const data = require ('../data/userDAO')
+const Userbdd = new data.userDAO();
 
 exports.UserService = class UserService {
 
         async getUsers() {
-            const users = await prisma.User.findMany({
-                include: {
-                  civility: true,
-                },
-              })
-              return users;
-        };
-
-        async signup(req) {
-            const {name, surname} = req.body
-            const result = await prisma.User.create({
-                data: {
-                  name,
-                  surname,
-                },
-              })
-            return result;
-        };
-
-        async deleteUserById(req) {
-          const { id } = req.params;
-          
-          try {            
-          const result = await prisma.User.delete({
-              where: {
-              id: Number(id),
-              },
-            });
-           
-            return result
-
+          try {
+            return await Userbdd.read();
           } catch (e) {
             return e;
           }
         };
 
-        async linkUserAndCivility(req) {
-          const { civilityId } = req.body;
-          const { id } = req.params;
+        async signup(ModelUser) {
 
+          if (ModelUser.name == null || ModelUser.name == "" ) {return "Merci de préciser un nom";} 
+          if (ModelUser.surname == null || ModelUser.surname == "" ) {return "Merci de préciser un prénom";}
+          
+            try {
+              return await Userbdd.create(ModelUser);
+            } catch (e) {
+              return e;
+            }
+        };
+
+        async deleteUserById(id) {
+          if (id == null || id == "" ) {return "Merci de préciser l'id";}
+          try {            
+            return await Userbdd.delete(id);
+          } catch (e) {
+            return e;
+          }
+        };
+
+        async linkUserAndCivility(id, civilityId) {
+          if (civilityId == null || civilityId == "" ) {return "Merci de précier l'id";} 
           try {
-           const result = await prisma.user
-            .update({
-              where: {
-              id: Number(id),
-              },
-              data: {
-                civilityId: Number(civilityId)
-              },
-              include: {
-                civility: true,
-              },
-            })
-            return result;
+           return await Userbdd.update(id,civilityId);
           } catch (e) {
             return e;
           }
