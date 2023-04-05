@@ -3,9 +3,10 @@ const { json } = require('express');
 const prisma = new PrismaClient()
 
 const userService = require('../service/userService');
-
+const civilityService = require('../service/civilityService');
 //ne laisser ici qu'un peu de logique, l'appel du service et un switch avec la reponse 
 const User = new userService.UserService(); //
+const Civility = new civilityService.CivilityService(); //
 
 exports.UserController = class UserController {
   
@@ -20,7 +21,7 @@ exports.UserController = class UserController {
     };
 
   async getCivilities (req, res) {
-      const result = await User.getCivilities();
+      const result = await Civility.getCivilities();
       res.json(result);
     };
 
@@ -30,12 +31,12 @@ exports.UserController = class UserController {
     };
 
   async deleteCivilityById (req, res) {
-      const result = await User.deleteCivilityById(req);
+      const result = await Civility.deleteCivilityById(req);
       res.json(result);
     };
 
   async addCivility (req, res) {
-      const result = await User.addCivility(req);
+      const result = await Civility.addCivility(req);
       res.json(result);
     };
 

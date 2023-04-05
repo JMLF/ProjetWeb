@@ -28,16 +28,6 @@ exports.UserService = class UserService {
             return result;
         };
 
-        async getCivilities() {
-          const users = await prisma.Civility.findMany({
-            include: {
-              user: true,
-            },
-          }
-          )
-          return users;
-        };
-
         async deleteUserById(req) {
           const { id } = req.params;
           
@@ -54,37 +44,6 @@ exports.UserService = class UserService {
             return e;
           }
         };
-
-
-        async deleteCivilityById(req) {
-          const { id } = req.params;
-
-          try {
-           const result = await prisma.Civility.delete({
-              where: {
-                id: Number(id),
-              },
-            })
-            return result;
-          } catch (e) {
-            return e;
-          }
-        }
-
-        async addCivility(req) {
-          const { status} = req.body;
-
-          try {
-          const result = await prisma.Civility.create({
-              data: {
-                status,
-              },
-            })
-            return result;
-          } catch (e) {
-            return e;
-          }
-        }
 
         async linkUserAndCivility(req) {
           const { civilityId } = req.body;

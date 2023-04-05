@@ -31,5 +31,5 @@ Using postgressql on local host.
 
 
 Il faudrait ustiliser des modèles pour passer les objets 
-Séparer les user service et les civility service 
 Test avec jest
+Faire une fonction dans le civilit service qui renvoi l'id d'une civ en fonction de son nom pour l'utiliser dans le user service. 
