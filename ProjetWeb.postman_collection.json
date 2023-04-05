@@ -7,7 +7,7 @@
 	},
 	"item": [
 		{
-			"name": "Hello World",
+			"name": "Ping",
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -26,52 +26,28 @@
 			"response": []
 		},
 		{
-			"name": "Url",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:3000/url",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"url"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "Post User",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "name",
-							"value": "test",
-							"type": "text"
-						},
-						{
-							"key": "surname",
-							"value": "test",
-							"type": "text"
+					"mode": "raw",
+					"raw": "{\n\"name\":\"mignard\",\n\"surname\":\"marius\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
 						}
-					]
+					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/signup",
+					"raw": "http://localhost:3000/api/signup",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
+						"api",
 						"signup"
 					]
 				}
@@ -103,15 +79,117 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/user/1",
+					"raw": "http://localhost:3000/api/user/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
+						"api",
 						"user",
 						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add civility",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"status\" : \"Autre\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/civility",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"civility"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add civility to user by id",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"civilityId\":\"1\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/user/3/civility",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"user",
+						"3",
+						"civility"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all civility",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/civility",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"civility"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete civility",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/civility/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"civility",
+						"4"
 					]
 				}
 			},
