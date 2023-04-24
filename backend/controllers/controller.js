@@ -19,10 +19,14 @@ exports.UserController = class UserController {
   async signupUser (req, res) {
       const {name, surname} = req.body;
       const ModelUser = new userm.userModel(name,surname); 
-
       //verifier que les deux champs sont présents
-      const result = await User.signup(ModelUser);
+      
+      try {
+        const result = await User.signup(ModelUser);
       res.json(result);
+      } catch (e) {
+        res.status(500).json({ message: `Erreur : ${e}` });
+      }
     };
 
   async getCivilities (req, res) {
@@ -33,8 +37,12 @@ exports.UserController = class UserController {
   async deleteUserById (req, res) {
       const { id } = req.params;
 
-      const result = await User.deleteUserById(id); 
-      res.json(result);    
+      try {
+        const result = await User.deleteUserById(id); 
+        res.json(result); 
+      } catch (e) {
+        res.status(500).json("Erreur : " + e);
+      }
     };
 
   async deleteCivilityById (req, res) {
@@ -44,8 +52,7 @@ exports.UserController = class UserController {
         const result = await Civility.deleteCivilityById(id);
         res.json(result);
       } catch (e) {
-        res.status(500).json(e);
-        return;
+        res.status(500).json("Erreur" + e);
       }
     };
 
@@ -60,8 +67,12 @@ exports.UserController = class UserController {
       const { civilityId } = req.body;
       const { id } = req.params;
 
-      const result = await User.linkUserAndCivility(id, civilityId);
+      try {
+        const result = await User.linkUserAndCivility(id, civilityId);
       res.json(result);
+      } catch (e) {
+        res.status(500).json("Erreur : " + e);
+      }
     };
 
 };

@@ -21,8 +21,8 @@ exports.UserService = class UserService {
 
         async signup(ModelUser) {
 
-          if (ModelUser.name == null || ModelUser.name == "" ) {return "Merci de préciser un nom";} 
-          if (ModelUser.surname == null || ModelUser.surname == "" ) {return "Merci de préciser un prénom";}
+          if (ModelUser.name == null || ModelUser.name == "" ) {throw "Merci de préciser un nom";} 
+          if (ModelUser.surname == null || ModelUser.surname == "" ) {throw "Merci de préciser un prénom";}
           
             try {
               return await Userbdd.create(ModelUser);
@@ -32,7 +32,7 @@ exports.UserService = class UserService {
         };
 
         async deleteUserById(id) {
-          if (id == null || id == "" ) {return "Merci de préciser l'id";}
+          if (id == null || id == "" ) {throw "Merci de préciser l'id";}
           try {            
             return await Userbdd.delete(id);
           } catch (e) {
@@ -41,7 +41,7 @@ exports.UserService = class UserService {
         };
 
         async linkUserAndCivility(id, civilityId) {
-          if (civilityId == null || civilityId == "" ) {return "Merci de précier l'id";} 
+          if (civilityId == null || civilityId == "" ) {throw "Merci de précier l'id";} 
           try {
            return await Userbdd.update(id,civilityId);
           } catch (e) {
