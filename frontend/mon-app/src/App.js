@@ -1,11 +1,18 @@
 import './App.css';
 import React, { useState, useEffect } from "react";
 import Header from './components/header_components';
-import getUser from './services/user_service';
-import { Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material';
 import Appbarrr from './components/appbar_components';
-import FloatingActionButtons from './components/floatingactionbuttons_components';
-import getCivility from './services/civility_service';
+import UserTile from './components/userTile_components';
+import UserGestion from './components/userGestion_components';
+import CivilityGestion from './components/civilityGestion_components';
+import AddDeleteIcons from './components/add-delete-icons_components';
+
+import Accordion from '@mui/material/Accordion';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import Typography from '@mui/material/Typography';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+
 
 
 function App() {
@@ -30,11 +37,8 @@ function App() {
      <div>
       <br></br> 
       <br></br> 
-      <h2>Gestion utilisateurs</h2>
-      <UserGestion></UserGestion>
       <br></br>
-      <h2>Gestion civilitées</h2>
-      <CivilityGestion></CivilityGestion>
+      <ControlledAccordions></ControlledAccordions>      
        </div> 
      :
      <div>
@@ -54,210 +58,80 @@ export default App;
 
 
 
-function UserTile() {
-  const [Loading, setLoading] = useState(true);
-  const [data, setData] = useState([]);
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const userData = await getUser();
-        console.log(userData);
-        setData(userData);
+function ControlledAccordions() {
+  const [expanded, setExpanded] = React.useState(false);
 
-        setLoading(false);
-      } catch (error) {
-        console.error(error);
-        setLoading(false);
-      }
-    }
-
-    fetchData();
-  }, []);
-
-  let freee = "pas de données";
-
-  // Créez une liste d'éléments JSX à partir des données utilisateur
-  //see : https://aguidehub.com/blog/2023-03-17-how-to-make-mui-table-with-body-scrollable-in-react-js/
-  const userList = data.map((user, index) => (
-    <div className='userTile' key={index}>
-      <div>Prenom : {user.surname}</div>
-      <div>Nom : {user.name}</div>
-      <div>id : {user.id}</div>
-    </div>
-  ));
+  const handleChange = (panel) => (event, isExpanded) => {
+    setExpanded(isExpanded ? panel : false);
+  };
 
   return (
     <div>
-    <div style={{ position: "sticky", top: 0 }}>
-      <Table>
-        <TableHead>
-          <TableRow
-            style={{
-              backgroundColor: "#f5f5f5",
-              height: "35px"
-            }}
-          >
-            <TableCell>User Id</TableCell>
-            <TableCell>Surname</TableCell>
-            <TableCell>Name</TableCell>
-            <TableCell>Gender</TableCell>
-          </TableRow>
-        </TableHead>
-      </Table>
+      <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1bh-content"
+          id="panel1bh-header"
+        >
+          <Typography sx={{ width: '33%', flexShrink: 0 }}>
+            Users
+          </Typography>
+          <Typography sx={{ color: 'text.secondary' }}>Gestions des utilisateurs</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+        <UserGestion></UserGestion>
+        </AccordionDetails>
+      </Accordion>
+      <Accordion expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel2bh-content"
+          id="panel2bh-header"
+        >
+          <Typography sx={{ width: '33%', flexShrink: 0 }}>Civilitées</Typography>
+          <Typography sx={{ color: 'text.secondary' }}>
+            Lister et associer des civilitées 
+          </Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+        <CivilityGestion></CivilityGestion>
+        </AccordionDetails>
+      </Accordion>
+      <Accordion expanded={expanded === 'panel3'} onChange={handleChange('panel3')}>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel3bh-content"
+          id="panel3bh-header"
+        >
+          <Typography sx={{ width: '33%', flexShrink: 0 }}>
+            Advanced user settings
+          </Typography>
+          <Typography sx={{ color: 'text.secondary' }}>
+            Créations et suppression d'item
+          </Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+       <AddDeleteIcons></AddDeleteIcons>
+        </AccordionDetails>
+      </Accordion>
+      <Accordion expanded={expanded === 'panel4'} onChange={handleChange('panel4')}>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel4bh-content"
+          id="panel4bh-header"
+        >
+          <Typography sx={{ width: '33%', flexShrink: 0 }}>
+            Advanced civility settings
+          </Typography>
+          <Typography sx={{ color: 'text.secondary' }}>
+            Créations et suppression d'item
+          </Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+       <AddDeleteIcons></AddDeleteIcons>
+        </AccordionDetails>
+      </Accordion>
     </div>
-    <div style={{ height: "300px", overflow: "auto" }}>
-      <Table style={{ tableLayout: "fixed" }}>
-        <TableBody>
-          {data.map((user, index) => {
-            return (
-              <TableRow key={index}>
-                <TableCell>{user.id}</TableCell>
-                <TableCell>{user.surname}</TableCell>
-                <TableCell>{user.name}</TableCell>
-                <TableCell>{user.civility.status}</TableCell>
-              </TableRow>
-            );
-          })}
-        </TableBody>
-      </Table>
-    </div>
-  </div>
-  ); 
+  );
 }
-
-
-function UserGestion() {
-  const [Loading, setLoading] = useState(true);
-  const [data, setData] = useState([]);
-
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const userData = await getUser();
-        console.log(userData);
-        setData(userData);
-
-        setLoading(false);
-      } catch (error) {
-        console.error(error);
-        setLoading(false);
-      }
-    }
-
-    fetchData();
-  }, []);
-
-  let freee = "pas de données";
-
-  // Créez une liste d'éléments JSX à partir des données utilisateur
-  //see : https://aguidehub.com/blog/2023-03-17-how-to-make-mui-table-with-body-scrollable-in-react-js/
-  const userList = data.map((user, index) => (
-    <div className='userTile' key={index}>
-      <div>Prenom : {user.surname}</div>
-      <div>Nom : {user.name}</div>
-      <div>id : {user.id}</div>
-    </div>
-  ));
-
-  return (
-    <div>
-    <div style={{ position: "sticky", top: 0 }}>
-      <Table>
-        <TableHead>
-          <TableRow
-            style={{
-              backgroundColor: "#f5f5f5",
-              height: "35px"
-            }}
-          >
-            <TableCell>User Id</TableCell>
-            <TableCell>Surname</TableCell>
-            <TableCell>Name</TableCell>
-            <TableCell>Gender</TableCell>
-            <TableCell>Action</TableCell>
-          </TableRow>
-        </TableHead>
-      </Table>
-    </div>
-    <div style={{ height: "300px", overflow: "auto" }}>
-      <Table style={{ tableLayout: "fixed" }}>
-        <TableBody>
-          {data.map((user, index) => {
-            return (
-              <TableRow key={index}>
-                <TableCell>{user.id}</TableCell>
-                <TableCell>{user.surname}</TableCell>
-                <TableCell>{user.name}</TableCell>
-                <TableCell>{user.civility.status}</TableCell>
-                <TableCell><FloatingActionButtons></FloatingActionButtons></TableCell>
-              </TableRow>
-            );
-          })}
-        </TableBody>
-      </Table>
-    </div>
-  </div>
-  ); 
-}
-
-function CivilityGestion() {
-  const [data, setData] = useState([]);
-
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const userData = await getCivility();
-        console.log(userData);
-        setData(userData);
-
-      } catch (error) {
-        console.error(error);
-  ;
-      }
-    }
-
-    fetchData();
-  }, []);
-
-  //see : https://aguidehub.com/blog/2023-03-17-how-to-make-mui-table-with-body-scrollable-in-react-js/
-  
-  return (
-    <div>
-    <div style={{ position: "sticky", top: 0 }}>
-      <Table>
-        <TableHead>
-          <TableRow
-            style={{
-              backgroundColor: "#f5f5f5",
-              height: "35px"
-            }}
-          >
-            <TableCell>Civility Id</TableCell>
-            <TableCell>Status</TableCell>
-            <TableCell>Users</TableCell>
-            <TableCell>Action</TableCell>
-          </TableRow>
-        </TableHead>
-      </Table>
-    </div>
-    <div style={{ height: "300px", overflow: "auto" }}>
-      <Table style={{ tableLayout: "fixed" }}>
-        <TableBody>
-          {data.map((civ, index) => {
-            return (
-              <TableRow key={index}>
-                <TableCell>{civ.id}</TableCell>
-                <TableCell>{civ.status}</TableCell>
-                <TableCell>{JSON.stringify(civ.user)}</TableCell>
-                <TableCell><FloatingActionButtons></FloatingActionButtons></TableCell>
-              </TableRow>
-            );
-          })}
-        </TableBody>
-      </Table>
-    </div>
-  </div>
-  ); 
-}
-

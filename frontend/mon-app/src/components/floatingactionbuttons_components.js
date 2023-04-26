@@ -8,10 +8,7 @@ import NavigationIcon from '@mui/icons-material/Navigation';
 function FloatingActionButtons() {
     return (
       <Box sx={{ '& > :not(style)': { m: 1 } }}>
-        <Fab color="primary" aria-label="add">
-          <AddIcon />
-        </Fab>
-        <Fab color="secondary" aria-label="edit">
+        <Fab size="small" color="secondary" aria-label="edit">
           <EditIcon />
         </Fab>
       </Box>
