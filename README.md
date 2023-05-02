@@ -25,7 +25,7 @@ route handler <=> controller <=> service <=> database access object (DAO)
 
 
 ## Frontend
-Stack : Node.js - React - MUI - Axios
+Stack : Node.js - React - MUI - Axios - React router 
 
 ### Installation : 
 ```npx create-react-app mon-app```
@@ -38,11 +38,6 @@ Stack : Node.js - React - MUI - Axios
 
 Launch front :	```npm start```
 
-### Architecture 
-ToDo
-
-### Reference : 
-
-
 ## ToDo 
 * https://thekenyandev.com/blog/routes-controllers-services-and-models-daos-in-a-nodejs-api-layered-architecture-in-depth/
+* Handle user creation with specific civility

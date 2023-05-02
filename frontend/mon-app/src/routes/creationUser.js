@@ -19,7 +19,11 @@ import {
 export default function UserCreationPage() {
     const navigate = useNavigate();
 
-     const [data, setData] = useState([]);
+     const [data, setData] = useState({
+      surname: "",
+      name: "",
+      civilityId: undefined
+    });
   const [civilities, setCivilities] = useState([]);
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
@@ -91,22 +95,6 @@ export default function UserCreationPage() {
             value={data.name}
             onChange={handleChange}
           />
-        </Grid>
-         <Grid item xs={12} sm={6}>
-          <FormControl fullWidth>
-            <InputLabel>Civilité</InputLabel>
-            <Select
-              value={data.civilityId}
-              name="civilityId"
-              onChange={handleChange}
-            >
-              {civilities.map((civility) => (
-                <MenuItem key={civility.id} value={civility.id}>
-                  {civility.status}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
         </Grid>
         <Grid item xs={12}>
           <Button

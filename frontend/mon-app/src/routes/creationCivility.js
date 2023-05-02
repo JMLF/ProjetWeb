@@ -9,17 +9,12 @@ import {
   Button,
   Grid,
   Typography,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
 } from "@mui/material";
 
 export default function CivilityCreationPage() {
     const navigate = useNavigate();
 
      const [data, setData] = useState([]);
-  const [civilities, setCivilities] = useState([]);
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
   const [snackbarSeverity, setSnackbarSeverity] = useState("success");

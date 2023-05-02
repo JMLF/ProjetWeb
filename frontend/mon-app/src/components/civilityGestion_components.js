@@ -22,9 +22,7 @@ function CivilityGestion() {
   
       fetchData();
     }, []);
-  
-    //see : https://aguidehub.com/blog/2023-03-17-how-to-make-mui-table-with-body-scrollable-in-react-js/
-    
+      
     return (
       <div>
       <div style={{ position: "sticky", top: 0 }}>

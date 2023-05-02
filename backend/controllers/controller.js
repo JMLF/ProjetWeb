@@ -50,11 +50,6 @@ exports.UserController = class UserController {
       }
     };
 
-  async getCivilities (req, res) {
-      const result = await Civility.getCivilities();
-      res.json(result);
-    };
-
   async deleteUserById (req, res) {
       const { id } = req.params;
 
@@ -65,26 +60,6 @@ exports.UserController = class UserController {
         res.status(500).json("Erreur : " + e);
       }
     };
-
-  async deleteCivilityById (req, res) {
-      const { id } = req.params;
-
-      try {
-        const result = await Civility.deleteCivilityById(id);
-        res.json(result);
-      } catch (e) {
-        res.status(500).json("Erreur" + e);
-      }
-    };
-
-  async addCivility (req, res) {
-      const {status} = req.body;
-
-      const result = await Civility.addCivility(status);
-      res.json(result);
-    };
-
-
 
 };
 
