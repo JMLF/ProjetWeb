@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
 import { Snackbar } from "@mui/material";
 import {Alert} from "@mui/material";
-import { getUserById, updateUser , deleteUserById} from "../services/user_service";
+import { createUser} from "../services/user_service";
 import getCivility from "../services/civility_service";
-import { Box } from "@mui/system";
 import {
   Container,
   TextField,
@@ -17,34 +15,12 @@ import {
   MenuItem,
 } from "@mui/material";
 
-export default function AdminUser() {
-  const { userId } = useParams();
-
-
-  const [loading, setLoading] = useState(true);
-  const [data, setData] = useState([]);
+export default function UserCreationPage() {
+     const [data, setData] = useState([]);
   const [civilities, setCivilities] = useState([]);
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
   const [snackbarSeverity, setSnackbarSeverity] = useState("success");
-
-
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const userData = await getUserById(userId);
-        console.log(userData);
-        setData(userData);
-
-        setLoading(false);
-      } catch (error) {
-        console.error(error);
-        setLoading(false);
-      }
-    }
-
-    fetchData();
-  }, []);
 
   useEffect(() => {
     async function fetchCivilities() {
@@ -64,37 +40,19 @@ export default function AdminUser() {
     setData({ ...data, [event.target.name]: event.target.value });
   };
 
-  const handleUpdateUser = async () => {
+  const handleCreateUser = async () => {
     try {
-      const updatedUser = await updateUser(data.id, data);
-      console.log("User updated:", updatedUser);
-      setSnackbarMessage("Utilisateur modifié avec succès");
+      const newUser = await createUser(data);
+      console.log("User created:", newUser);
+      setSnackbarMessage("Utilisateur créé avec succès");
       setSnackbarSeverity("success");
       setOpenSnackbar(true);
       // history.push("/"); // Naviguez vers la page d'accueil
     } catch (error) {
-      console.error("Error updating user:", error);
-      setSnackbarMessage("Erreur lors de la modification de l'utilisateur" , error);
-    setSnackbarSeverity("error");
-    setOpenSnackbar(true);
-    }
-  };
-
-  const deleteUser = async () => {
-    try {
-      const updatedUser = await deleteUserById(data.id);
-      console.log("User updated:", updatedUser);
-      
-      setSnackbarMessage("Utilisateur supprimé avec succès");
-      setSnackbarSeverity("success");
+      console.error("Error creating user:", error);
+      setSnackbarMessage("Erreur lors de la création de l'utilisateur");
+      setSnackbarSeverity("error");
       setOpenSnackbar(true);
-
-      //Naviguer vers /
-    } catch (error) {
-      console.error("Error updating user:", error);
-      setSnackbarMessage("Erreur lors de la suppression de l'utilisateur");
-    setSnackbarSeverity("error");
-    setOpenSnackbar(true);
     }
   };
 
@@ -105,14 +63,12 @@ export default function AdminUser() {
     setOpenSnackbar(false);
   };
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+ 
 
   return (
     <Container>
       <Typography variant="h4" gutterBottom>
-        Modifier l'utilisateur
+        Créer un utilisateur
       </Typography>
       <Grid container spacing={3}>
         <Grid item xs={12} sm={6}>
@@ -133,16 +89,6 @@ export default function AdminUser() {
             onChange={handleChange}
           />
         </Grid>
-        <Grid item xs={12}>
-          <TextField
-            fullWidth
-            label="ID"
-            name="id"
-            value={data.id}
-            onChange={handleChange}
-            disabled
-          />
-        </Grid>
          <Grid item xs={12} sm={6}>
           <FormControl fullWidth>
             <InputLabel>Civilité</InputLabel>
@@ -159,33 +105,14 @@ export default function AdminUser() {
             </Select>
           </FormControl>
         </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            fullWidth
-            label="Statut de civilité"
-            name="civilityStatus"
-            value={data.civility.status}
-            onChange={handleChange}
-            disabled
-          />
-        </Grid>
         <Grid item xs={12}>
           <Button
             variant="contained"
             color="primary"
-            onClick={handleUpdateUser}
+            onClick={handleCreateUser}
           >
-            Mettre à jour
+            Créer
           </Button>
-          <Box component="span" marginLeft={2}>
-          <Button 
-            variant="contained"
-            color="error"
-            onClick={deleteUser}
-          >
-           Supprimer l'utilisateur
-          </Button>
-          </Box>
         </Grid>
       </Grid>
       <Snackbar
@@ -200,4 +127,5 @@ export default function AdminUser() {
 </Snackbar>
     </Container>
   );
+
 }

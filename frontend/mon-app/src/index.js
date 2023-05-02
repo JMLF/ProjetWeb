@@ -8,6 +8,7 @@ import App from './App';
 import ErrorPage from "./error-page";
 import AdminCiv from './routes/administrationCivility';
 import AdminUser from './routes/administrationUsers';
+import UserCreationPage from './routes/creationUser';
 
 import {
   createBrowserRouter,
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
   {
     path: "/civility-gestion/:userId",
     element: <AdminCiv />,
+  },
+  {
+    path: "/create/user",
+    element: <UserCreationPage />,
   },
 ]);
 

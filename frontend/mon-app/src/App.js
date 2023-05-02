@@ -84,6 +84,7 @@ function ControlledAccordions() {
         </AccordionSummary>
         <AccordionDetails>
           <UserGestion></UserGestion>
+          <AddDeleteIcons path={"user"}> </AddDeleteIcons>
         </AccordionDetails>
       </Accordion>
       <Accordion expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
@@ -94,47 +95,14 @@ function ControlledAccordions() {
         >
           <Typography sx={{ width: '33%', flexShrink: 0 }}>Civilitées</Typography>
           <Typography sx={{ color: 'text.secondary' }}>
-            Lister et associer des civilitées
+            Lister ajouter et modifier des civilitées
           </Typography>
         </AccordionSummary>
         <AccordionDetails>
           <CivilityGestion></CivilityGestion>
+          <AddDeleteIcons path={"civility"}> </AddDeleteIcons>
         </AccordionDetails>
       </Accordion>
-      <Accordion expanded={expanded === 'panel3'} onChange={handleChange('panel3')}>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel3bh-content"
-          id="panel3bh-header"
-        >
-          <Typography sx={{ width: '33%', flexShrink: 0 }}>
-            Advanced user settings
-          </Typography>
-          <Typography sx={{ color: 'text.secondary' }}>
-            Créations et suppression d'item
-          </Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <AddDeleteIcons></AddDeleteIcons>
-        </AccordionDetails>
-      </Accordion>
-      <Accordion expanded={expanded === 'panel4'} onChange={handleChange('panel4')}>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel4bh-content"
-          id="panel4bh-header"
-        >
-          <Typography sx={{ width: '33%', flexShrink: 0 }}>
-            Advanced civility settings
-          </Typography>
-          <Typography sx={{ color: 'text.secondary' }}>
-            Créations et suppression d'item
-          </Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <AddDeleteIcons> </AddDeleteIcons>
-        </AccordionDetails>
-  </Accordion>
     </div>
   );
 }
