@@ -5,6 +5,7 @@ import {Alert} from "@mui/material";
 import { getUserById, updateUser , deleteUserById} from "../services/user_service";
 import getCivility from "../services/civility_service";
 import { Box } from "@mui/system";
+import { useNavigate } from 'react-router-dom';
 import {
   Container,
   TextField,
@@ -18,6 +19,7 @@ import {
 } from "@mui/material";
 
 export default function AdminUser() {
+  const navigate = useNavigate();
   const { userId } = useParams();
 
 
@@ -71,7 +73,7 @@ export default function AdminUser() {
       setSnackbarMessage("Utilisateur modifié avec succès");
       setSnackbarSeverity("success");
       setOpenSnackbar(true);
-      // history.push("/"); // Naviguez vers la page d'accueil
+      navigate('/');
     } catch (error) {
       console.error("Error updating user:", error);
       setSnackbarMessage("Erreur lors de la modification de l'utilisateur" , error);
@@ -88,8 +90,7 @@ export default function AdminUser() {
       setSnackbarMessage("Utilisateur supprimé avec succès");
       setSnackbarSeverity("success");
       setOpenSnackbar(true);
-
-      //Naviguer vers /
+      navigate('/');
     } catch (error) {
       console.error("Error updating user:", error);
       setSnackbarMessage("Erreur lors de la suppression de l'utilisateur");

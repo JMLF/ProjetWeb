@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Snackbar } from "@mui/material";
 import {Alert} from "@mui/material";
-import { createUser} from "../services/user_service";
-import getCivility from "../services/civility_service";
+import { createCivility } from "../services/civility_service";
 import { useNavigate } from 'react-router-dom';
 import {
   Container,
@@ -16,7 +15,7 @@ import {
   MenuItem,
 } from "@mui/material";
 
-export default function UserCreationPage() {
+export default function CivilityCreationPage() {
     const navigate = useNavigate();
 
      const [data, setData] = useState([]);
@@ -25,35 +24,21 @@ export default function UserCreationPage() {
   const [snackbarMessage, setSnackbarMessage] = useState("");
   const [snackbarSeverity, setSnackbarSeverity] = useState("success");
 
-  useEffect(() => {
-    async function fetchCivilities() {
-      try {
-        const civilityData = await getCivility();
-        console.log(civilityData);
-        setCivilities(civilityData);
-      } catch (error) {
-        console.error(error);
-      }
-    }
-
-    fetchCivilities();
-  }, []);
 
   const handleChange = (event) => {
     setData({ ...data, [event.target.name]: event.target.value });
   };
 
-  const handleCreateUser = async () => {
+  const handleCreateCiv = async () => {
     try {
-      const newUser = await createUser(data);
-      console.log("User created:", newUser);
-      setSnackbarMessage("Utilisateur créé avec succès");
+      const newUser = await createCivility(data);
+      setSnackbarMessage("Civilité créé avec succès");
       setSnackbarSeverity("success");
       setOpenSnackbar(true);
       navigate('/');
     } catch (error) {
-      console.error("Error creating user:", error);
-      setSnackbarMessage("Erreur lors de la création de l'utilisateur");
+      console.error("Error creating civ:", error);
+      setSnackbarMessage("Erreur lors de la création de la civilité");
       setSnackbarSeverity("error");
       setOpenSnackbar(true);
     }
@@ -71,48 +56,23 @@ export default function UserCreationPage() {
   return (
     <Container>
       <Typography variant="h4" gutterBottom>
-        Créer un utilisateur
+        Créer une civilité
       </Typography>
       <Grid container spacing={3}>
         <Grid item xs={12} sm={6}>
           <TextField
             fullWidth
-            label="Prénom"
-            name="surname"
-            value={data.surname}
+            label="Label"
+            name="status"
+            value={data.status}
             onChange={handleChange}
           />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            fullWidth
-            label="Nom"
-            name="name"
-            value={data.name}
-            onChange={handleChange}
-          />
-        </Grid>
-         <Grid item xs={12} sm={6}>
-          <FormControl fullWidth>
-            <InputLabel>Civilité</InputLabel>
-            <Select
-              value={data.civilityId}
-              name="civilityId"
-              onChange={handleChange}
-            >
-              {civilities.map((civility) => (
-                <MenuItem key={civility.id} value={civility.id}>
-                  {civility.status}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
         </Grid>
         <Grid item xs={12}>
           <Button
             variant="contained"
             color="primary"
-            onClick={handleCreateUser}
+            onClick={handleCreateCiv}
           >
             Créer
           </Button>

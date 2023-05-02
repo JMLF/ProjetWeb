@@ -95,7 +95,7 @@ function ControlledAccordions() {
         >
           <Typography sx={{ width: '33%', flexShrink: 0 }}>Civilitées</Typography>
           <Typography sx={{ color: 'text.secondary' }}>
-            Lister ajouter et modifier des civilitées
+           Attention, si un utilsateur possède la civ vous ne pouvez pas la supprimer
           </Typography>
         </AccordionSummary>
         <AccordionDetails>

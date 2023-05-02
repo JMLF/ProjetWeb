@@ -1,7 +1,6 @@
 import Box from '@mui/material/Box';
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
-import { Delete } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 
 function AddDeleteIcons(props) {

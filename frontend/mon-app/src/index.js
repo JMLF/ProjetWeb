@@ -6,9 +6,9 @@ import reportWebVitals from './reportWebVitals';
 
 import App from './App';
 import ErrorPage from "./error-page";
-import AdminCiv from './routes/administrationCivility';
 import AdminUser from './routes/administrationUsers';
 import UserCreationPage from './routes/creationUser';
+import CivilityCreationPage from './routes/creationCivility';
 
 import {
   createBrowserRouter,
@@ -26,12 +26,12 @@ const router = createBrowserRouter([
     element: <AdminUser />,
   },
   {
-    path: "/civility-gestion/:userId",
-    element: <AdminCiv />,
-  },
-  {
     path: "/create/user",
     element: <UserCreationPage />,
+  },
+  {
+    path: "/create/civility",
+    element: <CivilityCreationPage />,
   },
 ]);
 
