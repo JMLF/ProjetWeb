@@ -13,11 +13,12 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
+import { BrowserRouter as Router, Route } from "react-router-dom"
 
 
 function App() {
   const [displayGestion, setdisplayGestion] = useState(false);
- 
+
 
   const handlePage = () => {
     if (displayGestion == true) {
@@ -31,24 +32,26 @@ function App() {
   return (
     <div className="App">
       <Appbarrr onAction={handlePage} displayGestion={displayGestion}></Appbarrr>
-     <br></br>
+      <br></br>
 
-     {displayGestion ? 
-     <div>
-      <br></br> 
-      <br></br> 
-      <br></br>
-      <ControlledAccordions></ControlledAccordions>      
-       </div> 
-     :
-     <div>
-      <br></br>
-     <Header></Header>
- <div className="ListUsers">
- <UserTile></UserTile>
- </div>
- </div>
-     }
+      {displayGestion ?
+        <div>
+          <br></br>
+          <br></br>
+          <br></br>
+          <ControlledAccordions></ControlledAccordions>
+        </div>
+        :
+       
+        <div>
+          <br></br>
+          <Header></Header>
+          <div className="ListUsers">
+            <UserTile></UserTile>
+          </div>
+        </div>
+    
+      }
 
     </div>
   );
@@ -80,7 +83,7 @@ function ControlledAccordions() {
           <Typography sx={{ color: 'text.secondary' }}>Gestions des utilisateurs</Typography>
         </AccordionSummary>
         <AccordionDetails>
-        <UserGestion></UserGestion>
+          <UserGestion></UserGestion>
         </AccordionDetails>
       </Accordion>
       <Accordion expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
@@ -91,11 +94,11 @@ function ControlledAccordions() {
         >
           <Typography sx={{ width: '33%', flexShrink: 0 }}>Civilitées</Typography>
           <Typography sx={{ color: 'text.secondary' }}>
-            Lister et associer des civilitées 
+            Lister et associer des civilitées
           </Typography>
         </AccordionSummary>
         <AccordionDetails>
-        <CivilityGestion></CivilityGestion>
+          <CivilityGestion></CivilityGestion>
         </AccordionDetails>
       </Accordion>
       <Accordion expanded={expanded === 'panel3'} onChange={handleChange('panel3')}>
@@ -112,7 +115,7 @@ function ControlledAccordions() {
           </Typography>
         </AccordionSummary>
         <AccordionDetails>
-       <AddDeleteIcons></AddDeleteIcons>
+          <AddDeleteIcons></AddDeleteIcons>
         </AccordionDetails>
       </Accordion>
       <Accordion expanded={expanded === 'panel4'} onChange={handleChange('panel4')}>
@@ -129,9 +132,9 @@ function ControlledAccordions() {
           </Typography>
         </AccordionSummary>
         <AccordionDetails>
-       <AddDeleteIcons></AddDeleteIcons>
+          <AddDeleteIcons> </AddDeleteIcons>
         </AccordionDetails>
-      </Accordion>
+  </Accordion>
     </div>
   );
 }

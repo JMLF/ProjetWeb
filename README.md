@@ -1,10 +1,13 @@
 # ProjetWeb
-Stack : Node.js - express.js - prisma - jest
+
 ## Backend 
+Stack : Node.js - express.js - prisma - jest
+
 ### Installation : 
 ```npm init```
 ```npm install express```
 ```npm install prisma```
+```npm install cors```
 ```npx prisma init```
 
 When schema.prisma update :	```npx prisma migrate dev```
@@ -22,15 +25,24 @@ route handler <=> controller <=> service <=> database access object (DAO)
 
 
 ## Frontend
+Stack : Node.js - React - MUI - Axios
 
-## BDD 
-Using postgressql on local host.
+### Installation : 
+```npx create-react-app mon-app```
+```npm install axios```
+```npm install @mui/material @emotion/react @emotion/styled```
+```npm install @mui/icons-material```
+```npm install @mui/system```
+```npm install @mui/icons-material```
+```npm install react-router-dom```   
+
+Launch front :	```npm start```
+
+### Architecture 
+ToDo
+
+### Reference : 
 
 
 ## ToDo 
 * https://thekenyandev.com/blog/routes-controllers-services-and-models-daos-in-a-nodejs-api-layered-architecture-in-depth/
-
-
-Il faudrait ustiliser des modèles pour passer les objets 
-Test avec jest
-Faire une fonction dans le civilit service qui renvoi l'id d'une civ en fonction de son nom pour l'utiliser dans le user service. 

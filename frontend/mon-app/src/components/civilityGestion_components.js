@@ -53,7 +53,7 @@ function CivilityGestion() {
                   <TableCell>{civ.id}</TableCell>
                   <TableCell>{civ.status}</TableCell>
                   <TableCell>{JSON.stringify(civ.user)}</TableCell>
-                  <TableCell><FloatingActionButtons></FloatingActionButtons></TableCell>
+                  <TableCell><FloatingActionButtons  objectId={civ.id} path={"civility-gestion"}></FloatingActionButtons></TableCell>
                 </TableRow>
               );
             })}

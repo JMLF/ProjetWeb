@@ -51,7 +51,7 @@ function UserGestion() {
                   <TableCell>{user.surname}</TableCell>
                   <TableCell>{user.name}</TableCell>
                   <TableCell>{user.civility.status}</TableCell>
-                  <TableCell><FloatingActionButtons></FloatingActionButtons></TableCell>
+                  <TableCell><FloatingActionButtons objectId={user.id} path={"user-gestion"}></FloatingActionButtons></TableCell>
                 </TableRow>
               );
             })}
