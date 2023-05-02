@@ -8,8 +8,13 @@ const router = express.Router();
 //Add new user   
 router.post(`/signup`, User.signupUser);
 
+router.post(`/user/:id`, User.updateUser);
+
 //Get all users
 router.get('/users', User.getUsers);
+
+//Get a user
+router.get('/users/:id', User.getUsers);
 
 //Get all civility
   router.get('/civility', User.getCivilities);
@@ -23,8 +28,6 @@ router.delete('/civility/:id', User.deleteCivilityById);
 //Ajout d'une civility
 router.post('/civility', User.addCivility);
 
-//Ajout civility à un user by id
-router.put('/user/:id/civility', User.linkUserAndCivility);
   
 module.exports = router;
 

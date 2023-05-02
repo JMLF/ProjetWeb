@@ -1,4 +1,4 @@
-import getUser from "../services/user_service";
+import {getUser} from "../services/user_service";
 import React, { useState, useEffect } from "react";
 import { Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material';
 

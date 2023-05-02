@@ -11,12 +11,8 @@ const Userbdd = new data.userDAO();
 
 exports.UserService = class UserService {
 
-        async getUsers() {
-          try {
-            return await Userbdd.read();
-          } catch (e) {
-            return e;
-          }
+        async getUsers(id) {
+            return await Userbdd.read(id);
         };
 
         async signup(ModelUser) {
@@ -24,30 +20,27 @@ exports.UserService = class UserService {
           if (ModelUser.name == null || ModelUser.name == "" ) {throw "Merci de préciser un nom";} 
           if (ModelUser.surname == null || ModelUser.surname == "" ) {throw "Merci de préciser un prénom";}
           
-            try {
               return await Userbdd.create(ModelUser);
-            } catch (e) {
-              return e;
-            }
+          
+        };
+
+        async update(ModelUser) {
+
+          if (ModelUser.name == null || ModelUser.name == "" ) {throw "Merci de préciser un nom";} 
+          if (ModelUser.surname == null || ModelUser.surname == "" ) {throw "Merci de préciser un prénom";}
+          if (ModelUser.id == null || ModelUser.id == "" ) {throw "Merci de préciser un id utilisateur";} 
+          
+            
+              return await Userbdd.update(ModelUser);
         };
 
         async deleteUserById(id) {
           if (id == null || id == "" ) {throw "Merci de préciser l'id";}
-          try {            
+        
             return await Userbdd.delete(id);
-          } catch (e) {
-            return e;
-          }
         };
 
-        async linkUserAndCivility(id, civilityId) {
-          if (civilityId == null || civilityId == "" ) {throw "Merci de précier l'id";} 
-          try {
-           return await Userbdd.update(id,civilityId);
-          } catch (e) {
-            return e;
-          }
-        }
+       
 
 
 }

@@ -12,8 +12,14 @@ const userm = require('../models/userModel');
 exports.UserController = class UserController {
   
   async getUsers (req, res) {
+    if (req.params != null ) {
+      const { id } = req.params;
+      const result = await User.getUsers(id);
+      res.json(result);
+    } else {
       const result = await User.getUsers();
       res.json(result);
+    }
     };
 
   async signupUser (req, res) {
@@ -25,6 +31,21 @@ exports.UserController = class UserController {
         const result = await User.signup(ModelUser);
       res.json(result);
       } catch (e) {
+        res.status(500).json({ message: `Erreur : ${e}` });
+      }
+    };
+
+    async updateUser (req, res) {
+      const {name, surname, civilityId} = req.body;
+      const {id} =  req.params;
+      const ModelUser = new userm.userModel(name,surname, id, civilityId); 
+      
+      try {
+        const result = await User.update(ModelUser);
+
+      res.json(result);
+      } catch (e) {
+        console.error(e);
         res.status(500).json({ message: `Erreur : ${e}` });
       }
     };
@@ -63,17 +84,7 @@ exports.UserController = class UserController {
       res.json(result);
     };
 
-  async linkUserAndCivility (req, res) {
-      const { civilityId } = req.body;
-      const { id } = req.params;
 
-      try {
-        const result = await User.linkUserAndCivility(id, civilityId);
-      res.json(result);
-      } catch (e) {
-        res.status(500).json("Erreur : " + e);
-      }
-    };
 
 };
 

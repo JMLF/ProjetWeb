@@ -13,9 +13,31 @@ exports.userDAO = class userDAO {
         return result;
     }
 
-    async read(param) {
-        if(param != null){
-            console.log("faire le get by id");
+    async update(ModelUser) {
+      const result = await prisma.user.update({
+        where: {
+          id: Number(ModelUser.id),
+        },
+        data: {
+          name: ModelUser.name,
+          surname: ModelUser.surname,
+          civilityId: Number(ModelUser.civilityId)
+        },
+      })
+      return result;
+  }
+
+    async read(id) {
+        if(id != null){
+          const result = await prisma.User.findUnique({
+            where: {
+              id: Number(id),
+              },
+            include: {
+              civility: true,
+            },
+          })
+          return result;
         }
         else {
                 const result = await prisma.User.findMany({
@@ -36,21 +58,6 @@ exports.userDAO = class userDAO {
           return result
     }
 
-    async update(userId, civilityId) {
-        const result = await prisma.user
-            .update({
-              where: {
-              id: Number(userId),
-              },
-              data: {
-                civilityId: Number(civilityId)
-              },
-              include: {
-                civility: true,
-              },
-            })
-            return result;
-    }
 
 
 }
