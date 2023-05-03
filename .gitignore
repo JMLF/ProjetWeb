@@ -42,5 +42,6 @@ build/Release
 node_modules/
 jspm_packages/
 
-
+#autre 
+.DS_Store
 

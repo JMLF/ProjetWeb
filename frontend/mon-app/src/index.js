@@ -6,14 +6,13 @@ import reportWebVitals from './reportWebVitals';
 
 import App from './App';
 import ErrorPage from "./error-page";
-import AdminUser from './routes/administrationUsers';
-import UserCreationPage from './routes/creationUser';
-import CivilityCreationPage from './routes/creationCivility';
+import TicketManagementPage from './routes/adminTicket';
 
 import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
+import TicketCreationPage from './routes/createTicket';
 
 const router = createBrowserRouter([
   {
@@ -22,16 +21,12 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
   {
-    path: "/user-gestion/:userId",
-    element: <AdminUser />,
+    path: "/ticket-gestion/:ticketId",
+    element: <TicketManagementPage />,
   },
   {
-    path: "/create/user",
-    element: <UserCreationPage />,
-  },
-  {
-    path: "/create/civility",
-    element: <CivilityCreationPage />,
+    path: "/create/ticket",
+    element: <TicketCreationPage />,
   },
 ]);
 

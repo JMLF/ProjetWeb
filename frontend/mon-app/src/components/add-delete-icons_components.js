@@ -9,7 +9,7 @@ function AddDeleteIcons(props) {
                  <Link to={`/create/${props.path}`}>
         <Fab variant="extended">
         <AddIcon sx={{ mr: 1 }} />
-          Add a new one
+          Ajouter un ticket
         </Fab>
         </Link>
       </Box>

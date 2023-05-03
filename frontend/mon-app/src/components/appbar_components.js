@@ -24,7 +24,7 @@ function Appbarrr({ onAction, displayGestion }) {
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           Gestion 
         </Typography>
-        <Button onClick={onAction} color="inherit"> {displayGestion? "Home" : "Gerer mes utilisateurs"}</Button>
+        <Button onClick={console.log("todo")} color="inherit"> {displayGestion? "Home" : "Gerer mes utilisateurs"}</Button>
       </Toolbar>
     </AppBar>
     );

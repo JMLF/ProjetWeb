@@ -9,7 +9,7 @@ exports.ticketService = class ticketService {
 
         async createTicket(ModelTicket) {
 
-          if (ModelTicket.titre == null || ModelTicket.name == "" ) {throw "Merci de préciser le titre du ticket";} 
+          if (ModelTicket.titre == null || ModelTicket.titre == "" ) {throw "Merci de préciser le titre du ticket";} 
           if (ModelTicket.titre.lenght > 100 ) {throw "Votre titre ne peux etre supérieur à 100 carractères";}
           
               return await Userbdd.create(ModelTicket);

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Snackbar } from "@mui/material";
 import {Alert} from "@mui/material";
-import { createCivility } from "../services/civility_service";
 import { useNavigate } from 'react-router-dom';
 import {
   Container,
@@ -9,31 +8,42 @@ import {
   Button,
   Grid,
   Typography,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
 } from "@mui/material";
+import { createTicket } from "../services/ticket_service";
 
-export default function CivilityCreationPage() {
+export default function TicketCreationPage() {
     const navigate = useNavigate();
 
-     const [data, setData] = useState([]);
+     const [data, setData] = useState({
+      titre: "",
+      description: "",
+    });
+ 
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
   const [snackbarSeverity, setSnackbarSeverity] = useState("success");
-
 
   const handleChange = (event) => {
     setData({ ...data, [event.target.name]: event.target.value });
   };
 
-  const handleCreateCiv = async () => {
+  const handleCreateTicket = async () => {
     try {
-      const newUser = await createCivility(data);
-      setSnackbarMessage("Civilité créé avec succès");
+      const newTicket = await createTicket(data);
+      console.log("Ticket created:", newTicket);
+      setSnackbarMessage("Ticket créé avec succès");
       setSnackbarSeverity("success");
       setOpenSnackbar(true);
-      navigate('/');
+      setTimeout(function(){
+        navigate('/');
+      }, 500); 
     } catch (error) {
-      console.error("Error creating civ:", error);
-      setSnackbarMessage("Erreur lors de la création de la civilité");
+      console.error("Error creating ticket:", error);
+      setSnackbarMessage("Erreur lors de la création du ticket");
       setSnackbarSeverity("error");
       setOpenSnackbar(true);
     }
@@ -47,27 +57,38 @@ export default function CivilityCreationPage() {
   };
 
  
-
   return (
     <Container>
       <Typography variant="h4" gutterBottom>
-        Créer une civilité
+        Créer un ticket
       </Typography>
       <Grid container spacing={3}>
         <Grid item xs={12} sm={6}>
           <TextField
             fullWidth
-            label="Label"
-            name="status"
-            value={data.status}
+            label="Titre"
+            name="titre"
+            value={data.titre}
             onChange={handleChange}
+            required
+            inputProps={{ maxLength: 100 }}
+          />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <TextField
+            fullWidth
+            label="Description"
+            name="description"
+            value={data.description}
+            onChange={handleChange}
+            inputProps={{ maxLength: 100 }}
           />
         </Grid>
         <Grid item xs={12}>
           <Button
             variant="contained"
             color="primary"
-            onClick={handleCreateCiv}
+            onClick={handleCreateTicket}
           >
             Créer
           </Button>

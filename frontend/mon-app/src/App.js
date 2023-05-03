@@ -1,10 +1,7 @@
 import './App.css';
 import React, { useState, useEffect } from "react";
-import Header from './components/header_components';
 import Appbarrr from './components/appbar_components';
-import UserTile from './components/userTile_components';
-import UserGestion from './components/userGestion_components';
-import CivilityGestion from './components/civilityGestion_components';
+import TicketGestion from './components/ticketGestion_components';
 import AddDeleteIcons from './components/add-delete-icons_components';
 
 import Accordion from '@mui/material/Accordion';
@@ -17,49 +14,24 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 
 function App() {
-  const [displayGestion, setdisplayGestion] = useState(false);
-
-
-  const handlePage = () => {
-    if (displayGestion == true) {
-      setdisplayGestion(false);
-    }
-    else {
-      setdisplayGestion(true);
-    }
-  };
 
   return (
     <div className="App">
-      <Appbarrr onAction={handlePage} displayGestion={displayGestion}></Appbarrr>
+      <Appbarrr></Appbarrr>
       <br></br>
 
-      {displayGestion ?
         <div>
           <br></br>
           <br></br>
           <br></br>
           <ControlledAccordions></ControlledAccordions>
         </div>
-        :
-       
-        <div>
-          <br></br>
-          <Header></Header>
-          <div className="ListUsers">
-            <UserTile></UserTile>
-          </div>
-        </div>
-    
-      }
 
     </div>
   );
 }
 
 export default App;
-
-
 
 
 function ControlledAccordions() {
@@ -78,29 +50,13 @@ function ControlledAccordions() {
           id="panel1bh-header"
         >
           <Typography sx={{ width: '33%', flexShrink: 0 }}>
-            Users
+            Tickets
           </Typography>
-          <Typography sx={{ color: 'text.secondary' }}>Gestions des utilisateurs</Typography>
+          <Typography sx={{ color: 'text.secondary' }}>Gestions des tickets</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <UserGestion></UserGestion>
-          <AddDeleteIcons path={"user"}> </AddDeleteIcons>
-        </AccordionDetails>
-      </Accordion>
-      <Accordion expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel2bh-content"
-          id="panel2bh-header"
-        >
-          <Typography sx={{ width: '33%', flexShrink: 0 }}>Civilitées</Typography>
-          <Typography sx={{ color: 'text.secondary' }}>
-           Attention, si un utilsateur possède la civ vous ne pouvez pas la supprimer
-          </Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <CivilityGestion></CivilityGestion>
-          <AddDeleteIcons path={"civility"}> </AddDeleteIcons>
+          <TicketGestion></TicketGestion>
+          <AddDeleteIcons path={"ticket"}> </AddDeleteIcons>
         </AccordionDetails>
       </Accordion>
     </div>
