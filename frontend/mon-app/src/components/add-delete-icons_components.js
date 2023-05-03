@@ -4,16 +4,16 @@ import AddIcon from '@mui/icons-material/Add';
 import { Link } from 'react-router-dom';
 
 function AddDeleteIcons(props) {
-    return(
-        <Box sx={{ '& > :not(style)': { m: 1 } }}>
-                 <Link to={`/create/${props.path}`}>
+  return (
+    <Box sx={{ '& > :not(style)': { m: 1 } }}>
+      <Link to={`/create/${props.path}`}>
         <Fab variant="extended">
-        <AddIcon sx={{ mr: 1 }} />
+          <AddIcon sx={{ mr: 1 }} />
           Ajouter un ticket
         </Fab>
-        </Link>
-      </Box>
-    );
+      </Link>
+    </Box>
+  );
 }
 
 export default AddDeleteIcons;

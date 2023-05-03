@@ -5,32 +5,32 @@ import { getTickets } from '../services/ticket_service';
 
 
 function TicketGestion() {
-    const [data, setData] = useState([]);
+  const [data, setData] = useState([]);
 
-    useEffect(() => {
-      async function fetchData() {
-        try {
-          const ticketData = await getTickets();
-          console.log(ticketData);
-          setData(ticketData);
-  
-        } catch (error) {
-          console.error(error);
-        }
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const ticketData = await getTickets();
+        console.log(ticketData);
+        setData(ticketData);
+
+      } catch (error) {
+        console.error(error);
       }
-  
-      fetchData();
-    }, []);
+    }
 
-    const handleTicketDeleted = (deletedTicketId) => {
-      const updatedTickets = data.filter((data) => data.id !== deletedTicketId);
-      setData(updatedTickets);
-    };
-    
-   
+    fetchData();
+  }, []);
 
-    return (
-      <div>
+  const handleTicketDeleted = (deletedTicketId) => {
+    const updatedTickets = data.filter((data) => data.id !== deletedTicketId);
+    setData(updatedTickets);
+  };
+
+
+
+  return (
+    <div>
       <div style={{ position: "sticky", top: 0 }}>
         <Table>
           <TableHead>
@@ -59,7 +59,7 @@ function TicketGestion() {
                   <TableCell>{ticket.titre}</TableCell>
                   <TableCell >{ticket.description}</TableCell>
                   <TableCell>{ticket.status}</TableCell>
-                  <TableCell><FloatingActionButtons objectId={ticket.id}  onTicketDeleted={handleTicketDeleted} path={"ticket-gestion"}></FloatingActionButtons></TableCell>
+                  <TableCell><FloatingActionButtons objectId={ticket.id} onTicketDeleted={handleTicketDeleted} path={"ticket-gestion"}></FloatingActionButtons></TableCell>
                 </TableRow>
               );
             })}
@@ -67,7 +67,7 @@ function TicketGestion() {
         </Table>
       </div>
     </div>
-    ); 
-  }
+  );
+}
 
-  export default TicketGestion;
+export default TicketGestion;

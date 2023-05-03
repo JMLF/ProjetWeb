@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Snackbar } from "@mui/material";
-import {Alert} from "@mui/material";
+import { Alert } from "@mui/material";
 import { useNavigate } from 'react-router-dom';
 import {
   Container,
@@ -16,13 +16,13 @@ import {
 import { createTicket } from "../services/ticket_service";
 
 export default function TicketCreationPage() {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-     const [data, setData] = useState({
-      titre: "",
-      description: "",
-    });
- 
+  const [data, setData] = useState({
+    titre: "",
+    description: "",
+  });
+
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
   const [snackbarSeverity, setSnackbarSeverity] = useState("success");
@@ -38,9 +38,9 @@ export default function TicketCreationPage() {
       setSnackbarMessage("Ticket créé avec succès");
       setSnackbarSeverity("success");
       setOpenSnackbar(true);
-      setTimeout(function(){
+      setTimeout(function () {
         navigate('/');
-      }, 500); 
+      }, 500);
     } catch (error) {
       console.error("Error creating ticket:", error);
       setSnackbarMessage("Erreur lors de la création du ticket");
@@ -56,7 +56,7 @@ export default function TicketCreationPage() {
     setOpenSnackbar(false);
   };
 
- 
+
   return (
     <Container>
       <Typography variant="h4" gutterBottom>
@@ -94,15 +94,15 @@ export default function TicketCreationPage() {
         </Grid>
       </Grid>
       <Snackbar
-  open={openSnackbar}
-  autoHideDuration={6000}
-  onClose={handleCloseSnackbar}
-  anchorOrigin={{ vertical: "top", horizontal: "right" }}
->
-  <Alert onClose={handleCloseSnackbar} severity={snackbarSeverity} sx={{ width: "100%" }}>
-    {snackbarMessage}
-  </Alert>
-</Snackbar>
+        open={openSnackbar}
+        autoHideDuration={6000}
+        onClose={handleCloseSnackbar}
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      >
+        <Alert onClose={handleCloseSnackbar} severity={snackbarSeverity} sx={{ width: "100%" }}>
+          {snackbarMessage}
+        </Alert>
+      </Snackbar>
     </Container>
   );
 

@@ -14,7 +14,7 @@ export async function getTicketsById(id) {
 export async function updateTicket(id, updatedUser) {
     const response = await axios.post(`http://localhost:3000/api/ticket/${id}`, updatedUser);
     return response.data;
-  }
+}
 
 export async function deleteTicketById(id) {
     // Utiliser des backticks (`) pour la concaténation de chaînes

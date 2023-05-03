@@ -11,12 +11,12 @@ import {
   MenuItem,
   Button,
 } from '@mui/material';
-import { useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import { getTicketsById, updateTicket } from '../services/ticket_service';
 
 const TicketManagementPage = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   const { ticketId } = useParams();
 
 
@@ -56,28 +56,28 @@ const TicketManagementPage = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-        const updatedTicket = await updateTicket(ticket.id, ticket);
-        console.log("Ticket updated:", updatedTicket);
-        setSnackbarMessage("Ticket créé avec succès");
+      const updatedTicket = await updateTicket(ticket.id, ticket);
+      console.log("Ticket updated:", updatedTicket);
+      setSnackbarMessage("Ticket créé avec succès");
       setSnackbarSeverity("success");
       setOpenSnackbar(true);
-      setTimeout(function(){
+      setTimeout(function () {
         navigate('/');
-      }, 500); 
-      } catch (error) {
-        console.error("Error updating ticket:", error);
-        setSnackbarMessage("Erreur lors de la création du ticket");
-        setSnackbarSeverity("error");
-        setOpenSnackbar(true);
-      }
-    };
- 
-    const handleCloseSnackbar = (event, reason) => {
-        if (reason === "clickaway") {
-          return;
-        }
-        setOpenSnackbar(false);
-      };
+      }, 500);
+    } catch (error) {
+      console.error("Error updating ticket:", error);
+      setSnackbarMessage("Erreur lors de la création du ticket");
+      setSnackbarSeverity("error");
+      setOpenSnackbar(true);
+    }
+  };
+
+  const handleCloseSnackbar = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpenSnackbar(false);
+  };
 
   return (
     <Container maxWidth="sm">
@@ -121,15 +121,15 @@ const TicketManagementPage = () => {
         </Button>
       </form>
       <Snackbar
-  open={openSnackbar}
-  autoHideDuration={6000}
-  onClose={handleCloseSnackbar}
-  anchorOrigin={{ vertical: "top", horizontal: "right" }}
->
-  <Alert onClose={handleCloseSnackbar} severity={snackbarSeverity} sx={{ width: "100%" }}>
-    {snackbarMessage}
-  </Alert>
-</Snackbar>
+        open={openSnackbar}
+        autoHideDuration={6000}
+        onClose={handleCloseSnackbar}
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      >
+        <Alert onClose={handleCloseSnackbar} severity={snackbarSeverity} sx={{ width: "100%" }}>
+          {snackbarMessage}
+        </Alert>
+      </Snackbar>
     </Container>
   );
 };

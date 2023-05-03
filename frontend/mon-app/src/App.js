@@ -3,14 +3,11 @@ import React, { useState, useEffect } from "react";
 import Appbarrr from './components/appbar_components';
 import TicketGestion from './components/ticketGestion_components';
 import AddDeleteIcons from './components/add-delete-icons_components';
-
 import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-
-
 
 
 function App() {
@@ -19,13 +16,8 @@ function App() {
     <div className="App">
       <Appbarrr></Appbarrr>
       <br></br>
-        <div>
-          <br></br>
-          <br></br>
-          <br></br>
-          <ControlledAccordions></ControlledAccordions>
-        </div>
-
+      <div style={{ height: '100px' }}></div>
+      <ControlledAccordions></ControlledAccordions>
     </div>
   );
 }
