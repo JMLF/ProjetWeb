@@ -1,35 +1,18 @@
-//https://openclassrooms.com/fr/courses/6390246-passez-au-full-stack-avec-node-js-express-et-mongodb/6466459-optimisez-la-structure-du-back-end
 const express = require('express')
-const Controller = require('../controllers/controller');
-const CivilityControler = require('../controllers/civilitycontroller');
-const Civ = new CivilityControler.CivilityController();
-const User = new Controller.UserController(); //
+const ticketController = require('../controllers/ticketController')
+const Ticket = new ticketController.TicketController();
 
 const router = express.Router();
 
-//Add new user   
-router.post(`/signup`, User.signupUser);
+router.post(`/ticket`, Ticket.createTicket);
 
-router.post(`/user/:id`, User.updateUser);
+router.post(`/ticket/:id`, Ticket.updateTicket);
 
-//Get all users
-router.get('/users', User.getUsers);
+router.get('/tickets', Ticket.getTicket);
 
-//Get a user
-router.get('/users/:id', User.getUsers);
+router.get('/tickets/:id', Ticket.getTicket);
 
-//Get all civility
-  router.get('/civility', Civ.getCivilities);
-
-//Delete user by id
-router.delete('/user/:id', User.deleteUserById);
-
-//Delete civility by id
-router.delete('/civility/:id', Civ.deleteCivilityById);
+router.delete('/ticket/:id', Ticket.deleteTicketById);
  
-//Ajout d'une civility
-router.post('/civility', Civ.addCivility);
-
-  
 module.exports = router;
 
