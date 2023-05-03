@@ -81,7 +81,6 @@ export default function TicketCreationPage() {
             name="description"
             value={data.description}
             onChange={handleChange}
-            inputProps={{ maxLength: 100 }}
           />
         </Grid>
         <Grid item xs={12}>

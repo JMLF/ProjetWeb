@@ -3,15 +3,16 @@ import FloatingActionButtons from './floatingactionbuttons_components';
 import React, { useState, useEffect } from "react";
 import { getTickets } from '../services/ticket_service';
 
+
 function TicketGestion() {
     const [data, setData] = useState([]);
-  
+
     useEffect(() => {
       async function fetchData() {
         try {
-          const userData = await getTickets();
-          console.log(userData);
-          setData(userData);
+          const ticketData = await getTickets();
+          console.log(ticketData);
+          setData(ticketData);
   
         } catch (error) {
           console.error(error);
@@ -20,7 +21,14 @@ function TicketGestion() {
   
       fetchData();
     }, []);
+
+    const handleTicketDeleted = (deletedTicketId) => {
+      const updatedTickets = data.filter((data) => data.id !== deletedTicketId);
+      setData(updatedTickets);
+    };
     
+   
+
     return (
       <div>
       <div style={{ position: "sticky", top: 0 }}>
@@ -44,14 +52,14 @@ function TicketGestion() {
       <div style={{ height: "300px", overflow: "auto" }}>
         <Table style={{ tableLayout: "fixed" }}>
           <TableBody>
-            {data.map((user, index) => {
+            {data.map((ticket, index) => {
               return (
                 <TableRow key={index}>
-                  <TableCell>{user.id}</TableCell>
-                  <TableCell>{user.titre}</TableCell>
-                  <TableCell>{user.description}</TableCell>
-                  <TableCell>{user.status}</TableCell>
-                  <TableCell><FloatingActionButtons objectId={user.id} path={"ticket-gestion"}></FloatingActionButtons></TableCell>
+                  <TableCell>{ticket.id}</TableCell>
+                  <TableCell>{ticket.titre}</TableCell>
+                  <TableCell >{ticket.description}</TableCell>
+                  <TableCell>{ticket.status}</TableCell>
+                  <TableCell><FloatingActionButtons objectId={ticket.id}  onTicketDeleted={handleTicketDeleted} path={"ticket-gestion"}></FloatingActionButtons></TableCell>
                 </TableRow>
               );
             })}

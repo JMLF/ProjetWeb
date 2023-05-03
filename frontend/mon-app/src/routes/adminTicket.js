@@ -6,6 +6,8 @@ import {
   FormControl,
   InputLabel,
   Select,
+  Snackbar,
+  Alert,
   MenuItem,
   Button,
 } from '@mui/material';
@@ -23,6 +25,11 @@ const TicketManagementPage = () => {
     description: '',
     status: 'A_FAIRE',
   });
+
+
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState("");
+  const [snackbarSeverity, setSnackbarSeverity] = useState("success");
 
   useEffect(() => {
     async function fetchData() {
@@ -51,12 +58,26 @@ const TicketManagementPage = () => {
     try {
         const updatedTicket = await updateTicket(ticket.id, ticket);
         console.log("Ticket updated:", updatedTicket);
+        setSnackbarMessage("Ticket créé avec succès");
+      setSnackbarSeverity("success");
+      setOpenSnackbar(true);
+      setTimeout(function(){
         navigate('/');
+      }, 500); 
       } catch (error) {
         console.error("Error updating ticket:", error);
+        setSnackbarMessage("Erreur lors de la création du ticket");
+        setSnackbarSeverity("error");
+        setOpenSnackbar(true);
       }
     };
  
+    const handleCloseSnackbar = (event, reason) => {
+        if (reason === "clickaway") {
+          return;
+        }
+        setOpenSnackbar(false);
+      };
 
   return (
     <Container maxWidth="sm">
@@ -80,7 +101,6 @@ const TicketManagementPage = () => {
           name="description"
           value={ticket.description}
           onChange={handleChange}
-          inputProps={{ maxLength: 100 }}
           margin="normal"
         />
         <FormControl fullWidth margin="normal">
@@ -100,6 +120,16 @@ const TicketManagementPage = () => {
           Mettre à jour
         </Button>
       </form>
+      <Snackbar
+  open={openSnackbar}
+  autoHideDuration={6000}
+  onClose={handleCloseSnackbar}
+  anchorOrigin={{ vertical: "top", horizontal: "right" }}
+>
+  <Alert onClose={handleCloseSnackbar} severity={snackbarSeverity} sx={{ width: "100%" }}>
+    {snackbarMessage}
+  </Alert>
+</Snackbar>
     </Container>
   );
 };

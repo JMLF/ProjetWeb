@@ -10,7 +10,6 @@ import { Link } from 'react-router-dom';
 import { deleteTicketById } from '../services/ticket_service';
 
 function FloatingActionButtons(props) {
-  const navigate = useNavigate();
 
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
@@ -25,6 +24,8 @@ function FloatingActionButtons(props) {
       setSnackbarMessage("Ticket supprimé avec succès");
       setSnackbarSeverity("success");
       setOpenSnackbar(true);
+
+      props.onTicketDeleted(props.objectId);
       
     } catch (error) {
       console.error("Error deleting civ:", error);

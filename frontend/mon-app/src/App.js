@@ -19,7 +19,6 @@ function App() {
     <div className="App">
       <Appbarrr></Appbarrr>
       <br></br>
-
         <div>
           <br></br>
           <br></br>
@@ -35,7 +34,7 @@ export default App;
 
 
 function ControlledAccordions() {
-  const [expanded, setExpanded] = React.useState(false);
+  const [expanded, setExpanded] = React.useState('panel1');
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);

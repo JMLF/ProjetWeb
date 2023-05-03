@@ -13,6 +13,6 @@ router.get('/tickets', Ticket.getTicket);
 router.get('/tickets/:id', Ticket.getTicket);
 
 router.delete('/ticket/:id', Ticket.deleteTicketById);
- 
+
 module.exports = router;
 
